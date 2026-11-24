@@ -7,8 +7,14 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
-      - run: npm install
-        working-directory: ./API de tickets
-      - run: npm install
-        working-directory: ./itesz-react-full
+          node-version: 22
+      - name: Ver que carpetas hay
+        run: ls -la
+      - name: Instalar backend
+        run: |
+          cd "API de tickets"
+          npm install
+      - name: Instalar frontend
+        run: |
+          cd "itesz-react-full"
+          npm install
