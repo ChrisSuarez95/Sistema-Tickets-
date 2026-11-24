@@ -1,0 +1,29 @@
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: Escuela123
+      MYSQL_DATABASE: tickets_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+  backend:
+    build: ./tickets-api
+    ports:
+      - "3002:3002"
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: Escuela123
+      DB_NAME: tickets_db
+    depends_on:
+      - db
+  frontend:
+    build: ./itesz-react-full
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+volumes:
+  db_data:
